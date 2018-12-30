@@ -5,6 +5,7 @@
 # Idea files
 ############
 .idea
+out
 
 *.iml
 .gradle

@@ -1,6 +1,10 @@
 package org.letuslearn.reflection;
 
+import org.letuslearn.annotations.WorkHandler;
+
 import java.lang.reflect.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ReflectionUtil {
 
@@ -124,7 +128,27 @@ public class ReflectionUtil {
       Constructor<?> constructor = employeeWorkerClass.getConstructor(employeeTargetClass);
       Object worker = constructor.newInstance(workerTarget);
       Method doWork = employeeWorkerClass.getMethod("doWork");
-      doWork.invoke(worker);
+      WorkHandler workHandler = employeeWorkerClass.getAnnotation(WorkHandler.class);
+      if (workHandler != null && workHandler.useThreadPool()) {
+        System.out.println("Thread Pool will be used to handle work");
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        executorService.submit(new Runnable() {
+          @Override
+          public void run() {
+            try {
+              doWork.invoke(worker);
+            } catch (IllegalAccessException e) {
+              e.printStackTrace();
+            } catch (InvocationTargetException e) {
+              e.printStackTrace();
+            }
+          }
+        });
+        executorService.shutdown();
+
+      } else {
+        doWork.invoke(worker);
+      }
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     } catch (NoSuchMethodException e) {

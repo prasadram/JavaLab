@@ -1,5 +1,8 @@
 package org.letuslearn.reflection;
 
+import org.letuslearn.annotations.ProcessedBy;
+
+@ProcessedBy(EmployeeWorker.class)
 public final class ContractEmployee extends Employee implements Runnable{
   private int holidays;
   public ContractEmployee(String id) {

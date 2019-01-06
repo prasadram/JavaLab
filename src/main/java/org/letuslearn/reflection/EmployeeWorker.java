@@ -1,5 +1,8 @@
 package org.letuslearn.reflection;
 
+import org.letuslearn.annotations.WorkHandler;
+
+@WorkHandler(useThreadPool = true)
 public class EmployeeWorker implements Runnable {
 
   Employee employee;

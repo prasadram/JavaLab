@@ -1,5 +1,8 @@
 package org.letuslearn.reflection;
 
+import org.letuslearn.annotations.ProcessedBy;
+
+@ProcessedBy(EmployeeWorker.class)
 public class Employee {
   private final String id;
   private int sal = 10;

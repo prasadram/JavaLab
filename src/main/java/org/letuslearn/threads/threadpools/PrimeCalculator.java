@@ -1,4 +1,4 @@
-package org.letuslearn.threadpools;
+package org.letuslearn.threads.threadpools;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

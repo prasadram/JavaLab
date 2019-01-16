@@ -1,4 +1,4 @@
-package org.letuslearn.threadpools;
+package org.letuslearn.threads.threadpools;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
